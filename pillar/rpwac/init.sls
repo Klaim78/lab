@@ -3,7 +3,7 @@ wac:
     host_insecure: True
     fqdn: "fo01.lab.klaim"
     proxy:
-      preservehost: On
+      preservehost: True
       proxypass: http://fo01.lab.jenny
     options:
       - 'opt1'
