@@ -1,0 +1,16 @@
+# START managed zone for vhost {{project}} -DO-NOT-EDIT-
+<virtualhost *:80>
+  ServerName {{dict.fqdn}}
+  ServerAlias {{dict.fqdn}}
+  ServerAdmin webmaster@axa-tech.com
+  DocumentRoot /var/www/{{dict.fqdn}}
+  ErrorLog /var/log/apache/{{dict.fqdn}}.log
+  CustomLog /var/log/apache/{{dict.fqdn}}.log combined
+
+  ProxyPreserveHost {{dict.proxy.preservehost}}
+  ProxyPass / {{dict.proxy.proxypass}}
+  ProxyPassreverse / {{dict.proxy.proxypass}}
+
+
+<virtualhost>
+# END managed zone
