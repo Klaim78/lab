@@ -1,4 +1,6 @@
-# START managed zone for vhost {{project}} -DO-NOT-EDIT-
+# START This file managed by Salt, DO NOT EDIT
+
+{% if dict.host_insecure %}
 <virtualhost *:80>
   ServerName {{dict.fqdn}}
   ServerAlias {{dict.fqdn}}
@@ -7,10 +9,45 @@
   ErrorLog /var/log/apache/{{dict.fqdn}}.log
   CustomLog /var/log/apache/{{dict.fqdn}}.log combined
 
+  {% for option in dict.options %}
+    {{option}}
+  {% endfor %}
+
   ProxyPreserveHost {{dict.proxy.preservehost}}
   ProxyPass / {{dict.proxy.proxypass}}
   ProxyPassreverse / {{dict.proxy.proxypass}}
 
-
 <virtualhost>
+
+{% else %}
+
+<virtualhost *:80>
+  ServerName {{dict.fqdn}}
+  ServerAlias {{dict.fqdn}}
+  ServerAdmin webmaster@axa-tech.com
+  DocumentRoot /var/www/{{dict.fqdn}}
+  ErrorLog /var/log/apache/{{dict.fqdn}}.log
+  CustomLog /var/log/apache/{{dict.fqdn}}.log combined
+
+  redirect / https://{{dict.fqdn}}/
+
+</virtualhost>
+<virtualhost *:443>
+  ServerName {{dict.fqdn}}
+  ServerAlias {{dict.fqdn}}
+  ServerAdmin webmaster@axa-tech.com
+  DocumentRoot /var/www/{{dict.fqdn}}
+  ErrorLog /var/log/apache/{{dict.fqdn}}.log
+  CustomLog /var/log/apache/{{dict.fqdn}}.log combined
+
+  {% for option in dict.options %}
+    {{option}}
+  {% endfor %}
+
+  ProxyPreserveHost {{dict.proxy.preservehost}}
+  ProxyPass / {{dict.proxy.proxypass}}
+  ProxyPassreverse / {{dict.proxy.proxypass}}
+<virtualhost>
+{% endif %}
+
 # END managed zone

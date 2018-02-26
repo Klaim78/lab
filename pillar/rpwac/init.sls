@@ -4,16 +4,16 @@ wac:
     fqdn: "fo01.lab.klaim"
     proxy:
       preservehost: True
-      proxypass: http://fo01.lab.jenny
+      proxypass: http://fo01.lab.jenny4
     options:
       - 'opt1'
       - 'opt2'
   project2:
-    host_insecure: True
+    host_insecure: true
     fqdn: "fo02.lab.klaim"
     proxy:
-      preservehost: False
-      proxypass: http://fo02.lab.jenny
+      preservehost: Falsebatbattabbbdede
+      proxypass: http://fo02.lab.jenny2
     options:
       - 'opt1'
       - 'opt2'
