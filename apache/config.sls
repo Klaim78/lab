@@ -1,4 +1,5 @@
-{% for project, dict in pillar.get('wac', {}).items() %}
+{% for projects, dict in pillar.get('wac', {}).items() %}
+{% for conf, dict in dict.items() %}
 /etc/httpd/conf.d/{{dict.fqdn}}.conf:
   file.managed:
     - source: salt://apache/files/template_apache.conf.jinja
@@ -6,7 +7,8 @@
     - backup: 'minion'
     - file_backup: {{dict.fqdn}}.conf
     - context:
-      project: {{project}}
+      conf: {{conf}}
+      projects: {{projects}}
       dict: {{dict}}
-
+{%endfor%}
 {%endfor%}

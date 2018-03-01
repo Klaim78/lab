@@ -1,4 +1,4 @@
-# START This file managed by Salt, DO NOT EDIT
+# START This file managed by Salt for the project {{projects}}/{{conf}}, DO NOT EDIT
 
 {% if dict.host_insecure %}
 <virtualhost *:80>
@@ -8,11 +8,11 @@
   DocumentRoot /var/www/{{dict.fqdn}}
   ErrorLog /var/log/apache/{{dict.fqdn}}.log
   CustomLog /var/log/apache/{{dict.fqdn}}.log combined
-
+  {% if dict.options %}
   {% for option in dict.options %}
     {{option}}
   {% endfor %}
-
+  {% endif %}
   ProxyPreserveHost {{dict.proxy.preservehost}}
   ProxyPass / {{dict.proxy.proxypass}}
   ProxyPassreverse / {{dict.proxy.proxypass}}
@@ -40,9 +40,11 @@
   ErrorLog /var/log/apache/{{dict.fqdn}}.log
   CustomLog /var/log/apache/{{dict.fqdn}}.log combined
 
+  {% if dict.options %}
   {% for option in dict.options %}
     {{option}}
   {% endfor %}
+  {% endif %}
 
   ProxyPreserveHost {{dict.proxy.preservehost}}
   ProxyPass / {{dict.proxy.proxypass}}
